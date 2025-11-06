@@ -1,0 +1,35 @@
+<root BTCPP_format="4" main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <RecoveryNode number_of_retries="6" name="NavigateRecovery">
+      <PipelineSequence name="NavigateWithReplanning">
+        <ProgressCheckerSelector selected_progress_checker="{selected_progress_checker}"
+                                 default_progress_checker="progress_checker"
+                                 topic_name="progress_checker_selector"/>
+        <GoalCheckerSelector selected_goal_checker="{selected_goal_checker}"
+                             default_goal_checker="general_goal_checker"
+                             topic_name="goal_checker_selector"/>
+        <ControllerSelector selected_controller="{selected_controller}"
+                            default_controller="FollowPath"
+                            topic_name="controller_selector"/>
+
+        <RateController hz="0.333">
+          <RecoveryNode name="ComputeAndTrackRoute">
+            <ComputeAndTrackRoute
+              server_name="route_server"
+              controller_server_name="controller_server"
+              error_code_id="{route_error_code}"
+              error_msg="{route_error_msg}"
+              goal_checker_id="{selected_goal_checker}"
+              progress_checker_id="{selected_progress_checker}"/>
+            <Sequence>
+              <WouldARouteRecoveryHelp error_code="{route_error_code}"/>
+              <ClearEntireCostmap name="ClearLocalCostmap-Context"
+                                  service_name="local_costmap/clear_entirely_local_costmap"/>
+            </Sequence>
+          </RecoveryNode>
+        </RateController>
+
+      </PipelineSequence>
+    </RecoveryNode>
+  </BehaviorTree>
+</root>
