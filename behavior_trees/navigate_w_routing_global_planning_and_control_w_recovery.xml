@@ -40,9 +40,9 @@
               </Fallback>
             </RateController>
           <Sequence>
-            <Fallback>
+            <!-- <Fallback>
               <WouldARouteRecoveryHelp error_code="{compute_route_error_code}"/>
-            </Fallback>
+            </Fallback> -->
             <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
           </Sequence>
         </RecoveryNode>
@@ -51,12 +51,12 @@
         <RateController hz="1.0">
           <RecoveryNode number_of_retries="1" name="ComputePathToPose">
             <Sequence>
-              <RemovePassedGoals input_goals="{route_goals}" output_goals="{route_goals}" radius="3.0"/>
+              <RemovePassedGoals input_goals="{route_goals}" output_goals="{route_goals}" radius="0.5"/>
               <GetNextFewGoals input_goals="{route_goals}" num_goals="2" output_goals="{planning_goals}"/>
               <ComputePathThroughPoses goals="{planning_goals}" path="{path}" planner_id="{selected_planner}" error_code_id="{compute_path_error_code}" error_msg="{compute_path_error_msg}"/>
             </Sequence>
             <Sequence>
-              <WouldAPlannerRecoveryHelp error_code="{compute_path_error_code}"/>
+              <!-- <WouldAPlannerRecoveryHelp error_code="{compute_path_error_code}"/> -->
               <ClearEntireCostmap name="ClearGlobalCostmap-Context" service_name="global_costmap/clear_entirely_global_costmap"/>
             </Sequence>
           </RecoveryNode>
@@ -66,16 +66,16 @@
         <RecoveryNode number_of_retries="1" name="FollowPath">
           <FollowPath path="{path}" controller_id="{selected_controller}" error_code_id="{follow_path_error_code}" error_msg="{follow_path_error_msg}"/>
           <Sequence>
-            <WouldAControllerRecoveryHelp error_code="{follow_path_error_code}"/>
+            <!-- <WouldAControllerRecoveryHelp error_code="{follow_path_error_code}"/> -->
             <ClearEntireCostmap name="ClearLocalCostmap-Context" service_name="local_costmap/clear_entirely_local_costmap"/>
           </Sequence>
         </RecoveryNode>
       </PipelineSequence>
       <Sequence>
-        <Fallback>
+        <!-- <Fallback>
           <WouldAControllerRecoveryHelp error_code="{follow_path_error_code}"/>
           <WouldAPlannerRecoveryHelp error_code="{compute_route_error_code}"/>
-        </Fallback>
+        </Fallback> -->
         <ReactiveFallback name="RecoveryFallback">
           <GoalUpdated/>
           <RoundRobin name="RecoveryActions">

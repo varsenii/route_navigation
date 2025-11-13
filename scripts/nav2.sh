@@ -1,0 +1,1 @@
+ros2 launch route_navigation route_navigation_launch.py > ../logs/nav2.log

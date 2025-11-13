@@ -27,7 +27,7 @@ def generate_launch_description() -> LaunchDescription:
 
     nav2_params_file = os.path.join(route_navigation_dir, 'config', 'nav2_params.yaml')
     map_yaml_file = os.path.join(route_navigation_dir, 'maps', 'apartment.yaml')
-    graph_filepath = os.path.join(route_navigation_dir, 'graphs', 'apartment_z_shape.geojson')
+    graph_filepath = os.path.join(route_navigation_dir, 'graphs', 'apartment_square.geojson')
     rviz_config_file = os.path.join(route_navigation_dir, 'rviz', 'nav.rviz')
 
     # start the visualization

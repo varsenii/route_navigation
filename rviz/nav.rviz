@@ -6,6 +6,7 @@ Panels:
       Expanded:
         - /TF1/Frames1
         - /StaticMap1/Topic1
+        - /Planner1
         - /Controller1/Map1
         - /RouteGraph1/Topic1
       Splitter Ratio: 0.5
@@ -248,7 +249,7 @@ Visualization Manager:
             Filter size: 10
             History Policy: Keep Last
             Reliability Policy: Reliable
-            Value: /plan
+            Value: /plan_smoothed
           Value: true
       Enabled: true
       Name: Planner
@@ -397,25 +398,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 3.9410994052886963
+      Distance: 2.5892555713653564
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: -0.8211532831192017
-        Y: -0.23382309079170227
-        Z: 0.7401507496833801
+        X: -0.7954058647155762
+        Y: 0.03801979869604111
+        Z: 2.395599126815796
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7553983330726624
-      Target Frame: base_link
+      Pitch: 0.7903982400894165
+      Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 6.273583889007568
+      Yaw: 3.018580436706543
     Saved: ~
 Window Geometry:
   Displays:
